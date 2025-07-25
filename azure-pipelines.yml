@@ -22,10 +22,15 @@ steps:
     goals: 'package'
 - task: CopyFiles@2
   inputs:
-    Contents: '**/.war'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    SourceFolder: '$(System.DefaultWorkingDirectory)/target'
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'  
+- script: ls -l $(System.DefaultWorkingDirectory)/target
+  displayName: 'List war Files'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'warFile'
     publishLocation: 'Container'
+
+
